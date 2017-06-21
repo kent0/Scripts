@@ -1,0 +1,2 @@
+cat nu.csv > nuc.csv
+cat */nu.csv >> nuc.csv

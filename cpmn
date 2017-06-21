@@ -1,0 +1,4 @@
+#!/bin/bash
+
+makemakenek;
+cp ~/Developer/Nek5000/bin/mn .;

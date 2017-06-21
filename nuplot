@@ -1,0 +1,15 @@
+cd ~/p1/long53/
+nuc
+gnuplot < nulinear
+
+cd ~/p1/long100/
+nuc
+gnuplot < nulinear
+
+cd ~/p1/short53/
+nuc
+gnuplot < nulinear
+
+cd ~/p1/short100/
+nuc
+gnuplot < nulinear

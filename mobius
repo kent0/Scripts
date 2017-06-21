@@ -1,0 +1,89 @@
+#!/usr/bin/perl
+
+use v5.10;
+
+sub organize { # prepares for the next run and sets up restart file
+    `echo \$(date -R) 'organizing...' >> mob.log`;
+    `cp -r base $next &>> mob.log`;
+    system "mvn $next/{base,$run_name" . '} &>> mob.log';
+    `cp $last/$restart $next/restart_0.f00001`;
+}
+
+sub compile { # compile using makenek
+    `echo \$(date -R) 'compiling...' >> mob.log`;
+    `cd $next; makenek $run_name &>> ../mob.log`;
+    if (`find $next/nek5000 2> /dev/null` eq '') {
+        `echo \$(date -R) 'compilation failed...' >> mob.log`;
+        exit;
+    }
+}
+
+sub run { # submit the job according to mob.cmd
+    `echo \$(date -R) 'starting run...' >> mob.log`;
+    `cd $next; ./mob.cmd $run_name &>> ../mob.log`;
+}
+
+sub update_last_next { # update last and next variable
+    ($last) = `ls -1d */ | tail -n 2 | head -n 1` =~ /([0-9]{5})/;
+    chomp($last);
+    `echo 'last = $last' >> mob.log`;
+    exit if ($last eq '99999');
+    $next = sprintf("%05d", $last + 1);
+    `echo 'next = $next' >> mob.log`;
+}
+
+sub update_name { # update name variable
+    chomp($name = `cat mob.name 2> /dev/null`);
+
+    if ($name eq '') {
+        chomp($name = `basename \$(pwd)`);
+        `echo $name > mob.name`;
+    }
+    `echo 'name = $name' >> mob.log`;
+}
+
+sub update_restart { # update restart variable
+    $out_format = $name . '_' . $last . '_' . '*0.f*';
+    if ($timeout) {
+        chomp($restart = `cd $last; find $out_format | tail -2 | head -1`);
+    } else {
+        chomp($restart = `cd $last; find $out_format | tail -1`);
+    }
+    `echo 'restart = $restart' >> mob.log`;
+}
+
+`mv mob.log mob.log2 2> /dev/null`;
+`echo \$(date -R) 'starting mobius...' >> mob.log`;
+`echo 'removing mob.info...' >> mob.log`;
+`rm mob.info 2> /dev/null`;
+
+update_name();
+
+for (;;) { # infinite loop
+    `echo \$(date -R) 'starting loop...' >> mob.log`;
+    `echo 'checking mob.info...' >> mob.log`;
+    chomp($info = `cat mob.info 2> /dev/null`);
+
+    if ($info eq '1') {
+        `echo 'mob.info == 1, exiting...' >> mob.log`;
+    } else { `echo 'continuing...' >> mob.log`; }
+
+    update_last_next();
+    $run_name = $name . '_' . $next . '_';
+
+    $log = `cat $last/*cobaltlog 2> /dev/null`;
+    $timeout = $log =~ /maximum execution time exceeded/;
+    $cleanrun = $log =~ /task completed normally/;
+
+    if ($timeout || $cleanrun) {
+        `echo \$(date -R) 'post-processing...' >> mob.log`;
+        `cd $last; ../mob.post &>> ../mob.log`;
+        `echo \$(date -R) 'proceeding to $next...' >> mob.log`;
+        update_restart();
+        organize();
+        compile();
+        run();
+    } else { `echo \$(date -R) 'sleeping...'`; }
+
+    sleep(60);
+}

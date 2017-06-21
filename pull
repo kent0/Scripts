@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~/Developer/Dotfiles
+git pull
+cd ~/Developer/Scripts
+git pull

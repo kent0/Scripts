@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ ! -f ~/Developer/Nek5000/bin/mn ]; then
+    makemakenek;
+fi
+
+~/Developer/Nek5000/bin/mn $1;

@@ -1,0 +1,1 @@
+sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > zero.usr

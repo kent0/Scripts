@@ -1,0 +1,7 @@
+for i in $( echo {1..9}{a..z} ); do
+    cd $i;
+    for j in $( ls *0.f* ); do
+        tar -czvf $j{.tar.gz,}
+    done
+    cd ..
+done
