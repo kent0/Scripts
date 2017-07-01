@@ -1,6 +1,9 @@
 #!/bin/bash
 
 cd ~/Developer/Dotfiles
+git stash
 git pull
+
 cd ~/Developer/Scripts
+git stash
 git pull
