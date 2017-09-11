@@ -1,0 +1,60 @@
+import sys,time,os,re,glob
+
+p = re.compile('\d[a-z]')
+start = p.findall(glob.glob(os.getcwd()+'/*.png')[-1])
+
+for f in glob.glob('*' + start + '*'):
+    os.remove(f)
+
+OpenDatabase("cooley.alcf.anl.gov:/gpfs/mira-fs0/projects/TurbFlowGen/kaneko/archive/long53/05/1b/vis.nek3d")
+
+InvertBackgroundColor()
+
+AddPlot("Pseudocolor", "temperature")
+AddOperator("ThreeSlice")
+
+v = GetView3D()
+v.viewNormal = (-0.541945, 0.55638, -0.629871)
+v.focus = (0, 0, 1.33351)
+v.viewUp = (0.40673, 0.829497, 0.382762)
+v.viewAngle = 30
+v.parallelScale = 1.63314
+v.nearPlane = -3.26628
+v.farPlane = 3.26628
+v.imagePan = (0, 0)
+v.imageZoom = 1
+v.perspective = 1
+v.eyeAngle = 2
+v.centerOfRotationSet = 0
+v.centerOfRotation = (0, 0, 1.33351)
+v.axis3DScaleFlag = 0
+v.axis3DScales = (1, 1, 1)
+v.shear = (0, 0, 1)
+v.windowValid = 1
+
+SetView3D(v)
+
+DrawPlots()
+flag = False
+
+for n in range(1,9):
+    for c in range(97,122):
+        run = str(n) + chr(c)
+        target = "cooley.alcf.anl.gov:/gpfs/mira-fs0/projects/TurbFlowGen/kaneko/archive/long53/05/" + run + "/vis.nek3d"
+        print "target = " + target
+        if run == start:
+            flag = True
+        if flag == False:
+            continue
+        ReplaceDatabase(target)
+        for i in range(TimeSliderGetNStates()):
+            TimeSliderSetState(i)
+            ResizeWindow(1,960,540+64)
+            DrawPlots()
+            s=SaveWindowAttributes()
+            s.width, s.height = 1920,1080
+            s.fileName='long53_05_' + run + '_' + str(i).zfill(3) + '_'
+            s.format = s.PNG
+            SetSaveWindowAttributes(s)
+            name = SaveWindow()
+            print "name = %s" % name
