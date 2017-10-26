@@ -1,0 +1,3 @@
+#!/bin/bash
+
+scp e1:~/f.tar.gz .; tar -xvzf f.tar.gz; rm f.tar.gz;
