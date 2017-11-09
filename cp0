@@ -1,1 +1,7 @@
-sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > zero.usr
+#!/bin/bash
+
+if [ "$#" -ne 0 ]; then
+    sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > $1.usr
+else
+    sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > zero.usr
+fi
