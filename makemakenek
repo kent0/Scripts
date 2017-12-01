@@ -4,7 +4,7 @@ sed -e 's/SOURCE_ROOT=/#SOURCE_ROOT=/' \
 -e 's/^F77=/#F77=/' -e 's/^CC=/#CC=/' -e 's/^PPLIST=/#PPLIST=/' \
 ~/Developer/Nek5000/bin/makenek > ~/Developer/Nek5000/bin/mn;
 
-if [ `uname` == 'Darwin' ]; then
+if [[ -n `command -v unbuffer` ]]; then
     sed -i .tmp 's/make /unbuffer make /' ~/Developer/Nek5000/bin/mn
     rm ~/Developer/Nek5000/bin/mn.tmp
 fi
