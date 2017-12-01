@@ -1,7 +1,20 @@
 #!/bin/bash
 
+tmp=`mktemp`
+
+sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > $tmp
+perl -pi -e 's/\(\)//' $tmp
+
+for ((;;)); do
+    if [[ -n `head -2 $tmp | tail -1 | grep subroutine` ]]; then
+        break
+    else
+        sed -i.backup -e '2d' $tmp
+    fi
+done
+
 if [ "$#" -ne 0 ]; then
-    sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > $1.usr
+    cp $tmp $1.usr
 else
-    sed '/implicit none/ { N; d; }' ~/Developer/Nek5000/core/zero.usr > zero.usr
+    cp $tmp zero.usr
 fi
