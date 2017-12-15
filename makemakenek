@@ -5,7 +5,7 @@ sed -e 's/SOURCE_ROOT=/#SOURCE_ROOT=/' \
 ~/Developer/Nek5000/bin/makenek > ~/Developer/Nek5000/bin/mn;
 
 if [[ -n `command -v unbuffer` ]]; then
-    sed -i .tmp 's/make /unbuffer make /' ~/Developer/Nek5000/bin/mn
+    sed -i.tmp 's/make /unbuffer make /' ~/Developer/Nek5000/bin/mn
     rm ~/Developer/Nek5000/bin/mn.tmp
 fi
 
