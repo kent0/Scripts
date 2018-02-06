@@ -2,5 +2,5 @@
 
 d=`date "+%Y-%m-%d"`
 mkdir $d
-mv -i $1 $d
+mv -i "$@" $d
 mv -i $d archive/
