@@ -1,0 +1,6 @@
+#!/bin/bash
+
+d=`date "+%Y-%m-%d"`
+mkdir -i $d
+cp -i $1 $d
+mv -i $d archive/
