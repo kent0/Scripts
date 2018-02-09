@@ -12,7 +12,7 @@ do
         (cd $r && nu)
     done
     nuc
-    cp nuc.csv ../nu/${d}.nuc.csv
+    cp nuc.csv ../nu/$d.nuc.csv
     cd ..
 done
 
