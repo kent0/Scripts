@@ -6,13 +6,13 @@ rm nu/*
 
 for d in `ls -d ./*`
 do
-    pushd $d
+    cd $d
     for r in [0-9][0-9][0-9][0-9][0-9]
     do
         (cd $r && nu)
     done
     nuc
     cp nuc.csv ../nu/${d}.nuc.csv
-    popd
+    cd ..
 done
 
