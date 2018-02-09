@@ -4,10 +4,10 @@ mkdir nu
 
 rm nu/*
 
-for d in `ls -d ./*`
+for d in *053/
 do
     cd $d
-    for r in [0-9][0-9][0-9][0-9][0-9]
+    for r in */
     do
         (cd $r && nu)
     done
