@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for d in `find . -type d`
+do
+    pushd $d
+    for r in [0-9][0-9][0-9][0-9][0-9]
+    do
+        (cd $r && nu)
+    done
+    nuc
+    cp nuc.csv ../${d}.nuc.csv
+done
