@@ -4,7 +4,7 @@ mkdir nu
 
 rm nu/*
 
-for d in `find . -type d`
+for d in `ls -d ./*`
 do
     pushd $d
     for r in [0-9][0-9][0-9][0-9][0-9]
