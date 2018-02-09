@@ -1,5 +1,9 @@
 #!/bin/bash
 
+mkdir nu
+
+rm nu/*
+
 for d in `find . -type d`
 do
     pushd $d
@@ -8,6 +12,7 @@ do
         (cd $r && nu)
     done
     nuc
-    cp nuc.csv ../${d}.nuc.csv
+    cp nuc.csv ../nu/${d}.nuc.csv
     popd
 done
+
