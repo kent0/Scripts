@@ -9,4 +9,5 @@ do
     done
     nuc
     cp nuc.csv ../${d}.nuc.csv
+    popd
 done
