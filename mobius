@@ -27,12 +27,14 @@ sub run { # submit the job according to mob.cmd
 }
 
 sub update_last_next { # update last and next variable
-    ($last) = `ls -1d */ | tail -n 2 | head -n 1` =~ /([0-9]{5})/;
-    chomp($last);
-    `echo 'last = $last' >> mob.log`;
+    $last_last=$last
+    chomp($last = `\ls -1d */ | grep '[0-9][0-9][0-9][0-9][0-9]' | tail -1`);
     exit if ($last eq '99999');
     $next = sprintf("%05d", $last + 1);
-    `echo 'next = $next' >> mob.log`;
+    if ($last_last ne $last) {
+        `echo 'last = $last' >> mob.log`
+        `echo 'next = $next' >> mob.log`;
+    };
 }
 
 sub update_name { # update name variable
@@ -72,14 +74,15 @@ $base=$config->{base};
 
 update_name();
 
+`echo \$(date -R) 'starting loop...' >> mob.log`;
+
 for (;;) { # infinite loop
-    `echo \$(date -R) 'starting loop...' >> mob.log`;
-    `echo 'checking mob.info...' >> mob.log`;
     chomp($info = `cat mob.info 2> /dev/null`);
 
     if ($info eq '1') {
         `echo 'mob.info == 1, exiting...' >> mob.log`;
-    } else { `echo 'continuing...' >> mob.log`; }
+        exit;
+    }
 
     update_last_next();
     $run_name = $name . '_' . $next . '_';
@@ -88,7 +91,12 @@ for (;;) { # infinite loop
     $timeout = $log =~ /maximum execution time exceeded/;
     $cleanrun = $log =~ /task completed normally/;
 
-    if ($timeout || $cleanrun) {
+    if ($timeout) {
+        `echo 'Run Timed out...' >> mob.log`;
+        exit 1;
+    }
+
+    if ($cleanrun) {
         `echo \$(date -R) 'post-processing...' >> mob.log`;
         `cd $last; ../mob.post &>> ../mob.log`;
         `echo \$(date -R) 'proceeding to $next...' >> mob.log`;
@@ -96,7 +104,7 @@ for (;;) { # infinite loop
         organize();
         compile();
         run();
-    } else { `echo \$(date -R) 'sleeping...'`; }
+    }
 
-    sleep(60);
+    sleep(10);
 }
