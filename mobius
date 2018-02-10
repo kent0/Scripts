@@ -14,7 +14,8 @@ sub compile { # compile using makenek
     `cd $next; ./mn $run_name &>> ../mob.log`;
     if (`find $next/nek5000 2> /dev/null` eq '') {
         `echo \$(date -R) 'compilation failed...' >> mob.log`;
-        exit;
+        `cat compiler.out | mail -s "$base Compilation Failed..." $email`;
+        exit 1;
     }
 }
 
@@ -57,6 +58,12 @@ sub update_restart { # update restart variable
 `echo \$(date -R) 'starting mobius...' >> mob.log`;
 `echo 'removing mob.info...' >> mob.log`;
 `rm mob.info 2> /dev/null`;
+
+$config=do("mob.config");
+die "Error reading config file: $!" unless defined $config;
+
+$email=$config->{email};
+$base=$config->{base};
 
 update_name();
 
