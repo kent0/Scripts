@@ -15,7 +15,7 @@ sub compile { # compile using makenek
     if (`find $next/nek5000 2> /dev/null` eq '') {
         `echo \$(date -R) 'error: compilation failed...' >> mob.log`;
         `cat compiler.out | mail -s 'Error on $machine: $name $next Compilation Failed...' $email`;
-        `echo \$(date -R) 'ending program...';
+        `echo \$(date -R) 'ending program...'`;
         exit 1;
     }
 }
