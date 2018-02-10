@@ -65,6 +65,8 @@ die "Error reading config file: $!" unless defined $config;
 $email=$config->{email};
 $base=$config->{base};
 
+print("email=$email,base=$base");
+
 update_name();
 
 for (;;) { # infinite loop
