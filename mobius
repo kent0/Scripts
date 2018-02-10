@@ -32,7 +32,7 @@ sub update_last_next { # update last and next variable
     exit if ($last eq '99999');
     $next = sprintf("%05d", $last + 1);
     if ($last_last ne $last) {
-        `echo 'last = $last' >> mob.log`
+        `echo 'last = $last' >> mob.log`;
         `echo 'next = $next' >> mob.log`;
     };
 }
