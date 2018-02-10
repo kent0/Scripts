@@ -62,10 +62,11 @@ sub update_restart { # update restart variable
 $config=do("mob.config");
 die "Error reading config file: $!" unless defined $config;
 
-$email=$config->{email};
+email=$config->{email};
 $base=$config->{base};
 
-print("email=$email,base=$base");
+`echo 'email = $email' >> mob.log`;
+`echo 'base = $base' >> mob.log`;
 
 update_name();
 
