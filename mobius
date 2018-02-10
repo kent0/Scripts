@@ -28,7 +28,8 @@ sub run { # submit the job according to mob.cmd
 
 sub update_last_next { # update last and next variable
     $last_last=$last;
-    chomp($last = `\ls -1d */ | grep '[0-9][0-9][0-9][0-9][0-9]' | tail -1`);
+    $search='\ls -1d */ | grep '[0-9][0-9][0-9][0-9][0-9]' | tail -1';
+    chomp($last = system("$search"));
     exit if ($last eq '99999');
     $next = sprintf("%05d", $last + 1);
     if ($last_last ne $last) {
