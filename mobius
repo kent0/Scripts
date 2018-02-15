@@ -81,7 +81,7 @@ for (;;) { # infinite loop
 
     if ($info eq '1') {
         `echo 'mob.info == 1, exiting...' >> mob.log`;
-        exit;
+        last;
     }
 
     update_last_next();
@@ -93,7 +93,7 @@ for (;;) { # infinite loop
 
     if ($timeout) {
         `echo 'Run Timed out...' >> mob.log`;
-        exit 1;
+        last;
     }
 
     if ($cleanrun) {
