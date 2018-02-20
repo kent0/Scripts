@@ -97,7 +97,7 @@ for (;;) { # infinite loop
     if ($timeout) {
         `echo 'Run Timed out...' >> mob.log`;
         $msubject = 'Run Exceeded Walltime';
-        $mbody = 'mbody.txt'
+        $mbody = 'mbody.txt';
         `echo '' > $mbody`;
         `echo '*****Cobaltlog*****' >> $mbody`;
         `cat *cobaltlog >> $mbody`;
