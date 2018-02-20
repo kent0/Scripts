@@ -20,6 +20,8 @@ sub compile { # compile using makenek
     }
 }
 
+sub msend { `cat $mbody | mail -s $msubject $email`; }
+
 sub run { # submit the job according to mob.cmd
     `echo \$(date -R) 'starting run...' >> mob.log`;
     $status=`cd $next; ./mob.cmd $run_name &>> ../mob.log; echo $?`;
@@ -54,6 +56,7 @@ sub update_restart { # update restart variable
     } else {
         chomp($restart = `cd $last; find $out_format | tail -1`);
     }
+    if ($restart eq '') { exit 1; }
     `echo 'restart = $restart' >> mob.log`;
 }
 
@@ -93,6 +96,16 @@ for (;;) { # infinite loop
 
     if ($timeout) {
         `echo 'Run Timed out...' >> mob.log`;
+        $msubject = 'Run Exceeded Walltime';
+        $mbody = 'mbody.txt'
+        `echo '' > $mbody`;
+        `echo '*****Cobaltlog*****' >> $mbody`;
+        `cat *cobaltlog >> $mbody`;
+        `echo '' >> $mbody`;
+        `echo '*****Logfile*****' >> $mbody`;
+        `cat logfile >> $mbody`;
+        msend();
+        `rm mbody.txt`;
         last;
     }
 
