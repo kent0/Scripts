@@ -20,7 +20,7 @@ sub compile { # compile using makenek
     }
 }
 
-sub msend { `cat $mbody | mail -s $msubject $email`; }
+sub msend { `cat $mbody | mail -s '$msubject' $email`; }
 
 sub run { # submit the job according to mob.cmd
     `echo \$(date -R) 'starting run...' >> mob.log`;
