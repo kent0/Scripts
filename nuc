@@ -1,2 +1,2 @@
-cat nu.csv > nuc.csv
+cat nu.csv 2> /dev/null > nuc.csv
 cat */nu.csv >> nuc.csv
