@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir nu
+mkdir nu 2> /dev/null
 
 rm nu/* 2> /dev/null
 
