@@ -2,7 +2,7 @@
 
 mkdir nu
 
-rm nu/*
+rm nu/* 2> /dev/null
 
 for d in *053/
 do
