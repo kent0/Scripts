@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cd $1
+rm -r obj
+rm SIZE
+rm nek5000
+rm mob.cmd
+rm mn
+rm *usr
+rm *rea
+rm *re2
+rm *ma2
+rm *map
+rm *log1*
+rm *log.*
+rm *.f
+mv restart_0.f00001 tmp
+rm *0.f*
+mv tmp restart_0.f00001
