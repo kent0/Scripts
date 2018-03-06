@@ -15,3 +15,5 @@ rm *log1*
 rm *log.*
 rm *.f
 rm *output
+rm SESSION.NAME
+rm makefile
