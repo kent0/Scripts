@@ -14,3 +14,4 @@ rm *map
 rm *log1*
 rm *log.*
 rm *.f
+rm *output
