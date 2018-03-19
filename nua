@@ -16,4 +16,3 @@ do
     cp nuc.csv ../nu/${d%/}.nuc.csv
     cd ..
 done
-
