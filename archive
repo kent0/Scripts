@@ -1,7 +1,5 @@
 #!/bin/bash
 
 d=`date "+%Y-%m-%d"`
-cd archive
-mkdir $d
-cd ..
-mv -i "$@" archive/$d
+mkdir -p archive/$d
+mv "$@" archive/$d
