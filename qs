@@ -8,7 +8,7 @@ rt=(`cat $body | awk 'print $5'`)
 for i in ${#wt[@]}; do
     t0=`date +%s -d ${wt[i]}`
     t1=`date +%s -d ${rt[i]}`
-    date -d@$(t0 - t1) -u +%T
+    date -d@$((t0 - t1)) -u +%T
 done
 iwalltime=`echo "$header" | grep -aob 'WallTime' | grep -oE '[0-9]+'`
 ijobname=`echo "$header" | grep -aob 'JobName' | grep -oE '[0-9]+'`
