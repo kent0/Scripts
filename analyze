@@ -1,0 +1,17 @@
+#!/bin/bash
+
+rm con.log
+dts=(`\ls | grep dt`)
+
+for i in "${dts[@]}"; do
+#  grep ' err' "$i"/logfile | tail -3  >> con.log
+   grep ' err' "$i"/logfile | grep '1.000000E-01' >> con.log
+done
+
+grep 'X err' con.log | awk '{print $1,$2,$3}' > xerr.log
+grep 'Y err' con.log | awk '{print $1,$2,$3}' > yerr.log
+grep 'P err' con.log | awk '{print $1,$2,$3}' > perr.log
+
+mkdir out
+rm out/*
+cp *.log out/
