@@ -16,3 +16,16 @@ do
     cp nuc.csv ../nu/${d%/}.nuc.csv
     cd ..
 done
+
+for d in *100/
+do
+    cd $d
+
+    for r in */
+    do
+        (cd $r && nu)
+    done
+    nuc
+    cp nuc.csv ../nu/${d%/}.nuc.csv
+    cd ..
+done
