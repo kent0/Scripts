@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tar -cvJf f.tar.xz $@; scp f.tar.xz e1:~; rm f.tar.xz;
