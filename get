@@ -1,4 +1,4 @@
 #!/bin/bash
 
-scp e1:~/f.tar.xz .
-tar -xvJf f.tar.xz
+scp e1:~/f.tar.gz .
+tar -xvzf f.tar.gz
