@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Usage: cd into the example directory to be run,
+#        run ../bin/linkc
+
+cwd=`pwd`
+twd=`pwd`/../../code
+
+rm steady.f 2> /dev/null
+rm NGMRES   2> /dev/null
+rm NGMRESC  2> /dev/null
+
+ln -s $twd/steady.f $cwd/steady.f
+ln -s $twd/NGMRES $cwd/NGMRES
+ln -s $twd/NGMRESC $cwd/NGMRESC
