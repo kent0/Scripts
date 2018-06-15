@@ -11,5 +11,3 @@ rm NGMRES   2> /dev/null
 rm NGMRESC  2> /dev/null
 
 ln -s $twd/steady.f $cwd/steady.f
-ln -s $twd/NGMRES $cwd/NGMRES
-ln -s $twd/NGMRESC $cwd/NGMRESC
