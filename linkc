@@ -5,9 +5,18 @@
 
 cwd=`pwd`
 twd=`pwd`/../../code
+swd=`pwd`/../../../liandkento/code
 
 rm steady.f 2> /dev/null
-rm NGMRES   2> /dev/null
-rm NGMRESC  2> /dev/null
+rm -r lapack 2> /dev/null
+
+rm schwarzli.f 2> /dev/null
+rm schwarzv.f 2> /dev/null
+rm HSMGL
 
 ln -s $twd/steady.f $cwd/steady.f
+ln -s $twd/lapack $cwd/lapack
+
+ln -s $swd/schwarzli.f $cwd/schwarzli.f
+ln -s $swd/schwarzv.f $cwd/schwarzv.f
+ln -s $swd/HSMGL $cwd/HSMGL
