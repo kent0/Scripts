@@ -4,6 +4,12 @@
 
 case=`basename $(pwd)`;
 mkdir ana;
+
+rm ana/a.list
+rm ana/c.list
+rm ana/restart_0.f*
+rm ana/SIZE
+
 ls 0*/avg*0.f* > ana/a.list
 ls 0*/tmn*0.f* > ana/t.list
 ln -s `pwd -P`/`ls 0*/restart*0.f* | head -1` `pwd -P`/ana/restart_0.f00001
