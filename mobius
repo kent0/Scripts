@@ -6,7 +6,7 @@ sub organize { # prepares for the next run and sets up restart file
     `echo \$(date -R) 'organizing...' >> mob.log`;
     `cp -r base $next &>> mob.log`;
     system "mvn $next/{base,$run_name" . '} &>> mob.log';
-    `ln -s $last/$restart $next/restart_0.f00001`;
+    `ln -s $(pwd -P)/$last/$restart $(pwd -P)/$next/restart_0.f00001`;
 }
 
 sub compile { # compile using makenek
