@@ -6,7 +6,7 @@ sub organize { # prepares for the next run and sets up restart file
     `echo \$(date -R) 'organizing...' >> mob.log`;
     `cp -r base $next &>> mob.log`;
     system "mvn $next/{base,$run_name" . '} &>> mob.log';
-    `cp $last/$restart $next/restart_0.f00001`;
+    `ln -s $last/$restart $next/restart_0.f00001`;
 }
 
 sub compile { # compile using makenek
@@ -96,12 +96,12 @@ for (;;) { # infinite loop
 
     if ($timeout) {
         `echo 'Run Timed out...' >> mob.log`;
-        $msubject = 'Run Exceeded Walltime';
+        $msubject = "$name $last Run Exceeded Walltime";
         $mbody = 'mbody.txt';
-        `echo '' > $mbody`;
-        `echo '*****Cobaltlog*****' >> $mbody`;
-        `cat *cobaltlog >> $mbody`;
-        `echo '' >> $mbody`;
+#       `echo '' > $mbody`;
+#       `echo '*****Cobaltlog*****' >> $mbody`;
+#       `cat *cobaltlog >> $mbody`;
+#       `echo '' >> $mbody`;
         `echo '*****Logfile*****' >> $mbody`;
         `cat logfile >> $mbody`;
         msend();
