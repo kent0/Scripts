@@ -9,7 +9,7 @@ rm ana/a.list 2> /dev/null
 rm ana/t.list 2> /dev/null
 rm ana/restart_0.f* 2> /dev/null
 rm ana/SIZE 2> /dev/null
-rm ana.usr 2> /dev/null
+rm ana/ana.usr 2> /dev/null
 
 ls 0*/avg*0.f* > ana/a.list
 ls 0*/tmn*0.f* > ana/t.list
