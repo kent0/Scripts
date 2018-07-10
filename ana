@@ -3,7 +3,7 @@
 # Listing script for wire analysis
 
 case=`basename $(pwd)`;
-mkdir ana;
+mkdir ana 2> /dev/null;
 
 rm ana/a.list 2> /dev/null
 rm ana/t.list 2> /dev/null
