@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Listing script for wire analysis
+
+case=`basename $(pwd)`;
+mkdir ana;
+ls 0*/avg*0.f* > ana/a.list
+ls 0*/tmn*0.f* > ana/t.list
