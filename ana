@@ -2,17 +2,27 @@
 
 # Listing script for wire analysis
 
-case=`basename $(pwd)`;
-mkdir ana 2> /dev/null;
+case=`basename $(pwd)`
+mkdir ana 2> /dev/null
+last="$(pwd -P)/$(ls 0* | grep tail -1)"
+cwd="$(pwd -P)"
 
 rm ana/a.list 2> /dev/null
 rm ana/t.list 2> /dev/null
+
 rm ana/restart_0.f* 2> /dev/null
+rm ana/ana.{rea,re2,map} 2> /dev/null
+
 rm ana/SIZE 2> /dev/null
 rm ana/ana.usr 2> /dev/null
 
 ls 0*/avg*0.f* > ana/a.list
 ls 0*/tmn*0.f* > ana/t.list
-ln -s `pwd -P`/`ls 0*/restart*0.f* | head -1` `pwd -P`/ana/restart_0.f00001
-ln -s `pwd -P`/`ls 0*/SIZE | head -1` `pwd -P`/ana/SIZE
-ln -s `pwd -P`/../analyze/analyze.usr `pwd -P`/ana/ana.usr
+
+cp {$last,$cwd/ana}/restart_0.f00001
+cp $last/*rea $cwd/ana.rea
+cp $last/*re2 $cwd/ana.re2
+cp $last/*map $cwd/ana.map
+
+ln -s "$last/SIZE" "$cwd/ana/SIZE"
+ln -s "$cwd/../analyze/analyze.usr" "$cwd/ana/ana.usr"
