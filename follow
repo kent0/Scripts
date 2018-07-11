@@ -5,3 +5,7 @@
 while qstat | grep "$1" &> /dev/null; do
 sleep 10
 done
+
+touch t
+
+notify $2 "JobID $1 ended on Cetus" t
