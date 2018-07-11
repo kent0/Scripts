@@ -4,7 +4,7 @@
 
 case=`basename $(pwd)`
 mkdir ana 2> /dev/null
-last="$(pwd -P)/$(ls 0* | grep tail -1)"
+last="$(pwd -P)/$(\ls | grep '[0-9][0-9][0-9][0-9][0-9]' | tail -1)"
 cwd="$(pwd -P)"
 
 rm ana/a.list 2> /dev/null
