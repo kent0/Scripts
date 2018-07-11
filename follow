@@ -2,6 +2,6 @@
 
 # Notify when a job ends on Mira/Cetus system
 
-while qstat | grep "$1" 2> /dev/null; do
+while qstat | grep "$1" &> /dev/null; do
 sleep 10
 done
