@@ -1,0 +1,10 @@
+genbox << EOF
+$1.box
+EOF
+
+cp box.rea $1.rea
+
+genmap << EOF
+$1
+.05
+EOF
