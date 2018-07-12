@@ -1,4 +1,10 @@
 #!/bin/bash
 
-scp e1:~/f.tar.gz .
-tar -xvzf f.tar.gz
+file="f.tar.gz"
+
+if [ "$#" -gt "0" ]; then
+    file="$1"
+fi
+   
+scp e1:~/$file .
+tar -xvzf $file
