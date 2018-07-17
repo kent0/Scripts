@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mkdir nu 2> /dev/null
+
+rm nu/* 2> /dev/null
+
+for d in *053/
+do
+    mkdir ~/$d
+    for r in */
+    do
+        mkdir ~/$d/$r
+        cp $d/$r/logfile ~/$d/$r/logfile
+    done
+done
