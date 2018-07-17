@@ -10,6 +10,6 @@ do
     for r in */
     do
         mkdir ~/$d/$r
-        cp $d/$r/logfile ~/$d/$r/logfile
+        cp ${d}${r}logfile ~/${d}${r}logfile
     done
 done
