@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# usage: arx directory
+
+case=`head -1 SESSION.NAME`
+cwd=`pwd -P`
+case=`basename $cwd`
+d=`date "+%Y-%m-%d"`
+dir="../../runs/${case}/${d}/${1}"
+mkdir -p $dir
+cpn $case ${dir}/${case}
+cp -n *log* $dir/
+mv -n *0.f* *.fld* $dir/
