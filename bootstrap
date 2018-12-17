@@ -1,5 +1,4 @@
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/ma
-ster/bootstrap)"; source ~/.bashrc
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/master/bootstrap)"; source ~/.bashrc
 
 mkdir ~/Developer
 cd ~/Developer 
