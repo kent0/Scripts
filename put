@@ -1,3 +1,3 @@
 #!/bin/bash
 
-tar -cvzf f.tar.gz $@; scp f.tar.gz e1:~; rm f.tar.gz;
+tar -hcvzf f.tar.gz $@; scp f.tar.gz e1:~; rm f.tar.gz;
