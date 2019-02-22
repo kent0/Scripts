@@ -5,6 +5,7 @@ use v5.10;
 sub organize { # prepares for the next run and sets up restart file
     `echo \$(date -R) 'organizing...' >> mob.log`;
     `cp -r base $next &>> mob.log`;
+    `cp -f base/*.f $next &>> mob.log`;
     system "mvn $next/{base,$run_name" . '} &>> mob.log';
 #   `ln -s $(pwd -P)/$last/$restart $(pwd -P)/$next/restart_0.f00001`;
     `cp $last/$restart $next/restart_0.f00001`;
