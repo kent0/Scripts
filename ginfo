@@ -1,16 +1,16 @@
 #!/bin/bash
 
-if [ "$#" -eq 0 ]; then
-    cwd=`pwd`
-else
-    cwd="$1"
-fi
+cwd=`pwd`
 
-grep Scale $cwd/0*/logfile > sf.log &
-grep lx1 $cwd/0*/logfile > lx1.log &
-grep lx2 $cwd/0*/logfile > lx2.log &
-grep NSTEPS $cwd/0*/logfile > nsteps.log &
-grep IOSTEP $cwd/0*/logfile > iostep.log &
-grep 'Step *1,' $cwd/0*/logfile > step1.log &
+if [ "$#" -ne 0 ]; then cd "$1"; fi
+
+grep Scale 0*/logfile > $cwd/sf.log &
+grep lx1 0*/logfile > $cwd/lx1.log &
+grep lx2 0*/logfile > $cwd/lx2.log &
+grep NSTEPS 0*/logfile > $cwd/nsteps.log &
+grep IOSTEP 0*/logfile > $cwd/iostep.log &
+grep 'Step *1,' 0*/logfile > $cwd/step1.log &
+
+cd $cwd
 
 wait
