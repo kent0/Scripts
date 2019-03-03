@@ -5,3 +5,4 @@ grep lx1 0*/logfile > lx1.log
 grep lx2 0*/logfile > lx2.log
 grep NSTEPS 0*/logfile > nsteps.log
 grep IOSTEP 0*/logfile > iostep.log
+grep 'Step *1,' 0*/logfile > step1.log
