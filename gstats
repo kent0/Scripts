@@ -1,8 +1,14 @@
 #!/bin/bash
 
-grep Scale 0*/logfile > sf.log
-grep lx1 0*/logfile > lx1.log
-grep lx2 0*/logfile > lx2.log
-grep NSTEPS 0*/logfile > nsteps.log
-grep IOSTEP 0*/logfile > iostep.log
-grep 'Step *1,' 0*/logfile > step1.log
+if [ "$#" -eq 0 ]; then
+    cwd=`pwd`
+else
+    cwd="$1"
+fi
+
+grep Scale $cwd/0*/logfile > sf.log
+grep lx1 $cwd/0*/logfile > lx1.log
+grep lx2 $cwd/0*/logfile > lx2.log
+grep NSTEPS $cwd/0*/logfile > nsteps.log
+grep IOSTEP $cwd/0*/logfile > iostep.log
+grep 'Step *1,' $cwd/0*/logfile > step1.log
