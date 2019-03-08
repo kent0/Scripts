@@ -13,8 +13,8 @@ sub organize { # prepares for the next run and sets up restart file
 
 sub compile { # compile using makenek
     `echo \$(date -R) 'compiling...' >> mob.log`;
-    `cd $next; ./mn $run_name &>> ../mob.log`;
     if (`find $next/nek5000 2> /dev/null` eq '') {
+    `cd $next; rm compiler.out; ./mn $run_name &>> ../mob.log`;
         `echo \$(date -R) 'error: compilation failed...' >> mob.log`;
         `cat $next/compiler.out | mail -s 'Error on $machine: $name $next Compilation Failed...' $email`;
         `echo \$(date -R) 'ending program...'`;
