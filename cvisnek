@@ -1,6 +1,6 @@
 #!/bin/bash
 
-count=0
+count=1
 for f in $(cat fld.list); do
     ln -s $f $(printf 'cfld0.f%05d' $count)
     let count+=1
