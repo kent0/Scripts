@@ -1,9 +1,10 @@
 #!/bin/bash
 
 count=1
+
 for f in $(cat fld.list); do
     ln -s $f $(printf 'cfld0.f%05d' $count)
     let count+=1
 done
-cp $(head -1 fld.list) cfld0.f00001
+
 visnek cfld
