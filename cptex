@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp ~/Developer/Templates/tex.tex $1.tex
+cp ~/Developer/Templates/tex.makefile makefile
