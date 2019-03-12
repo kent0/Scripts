@@ -1,3 +1,5 @@
+rm box.rea
+
 genbox << EOF
 $1.box
 EOF
