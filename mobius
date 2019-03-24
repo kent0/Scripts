@@ -26,8 +26,11 @@ sub msend { `cat $mbody | mail -s '$msubject' $email`; }
 
 sub run { # submit the job according to mob.cmd
     `echo \$(date -R) 'starting run...' >> mob.log`;
-    $status=`cd $next; ./mob.cmd $run_name &>> ../mob.log; echo $?`;
-    if (status == 1) { exit 1; }
+    $status=`cd $next; ./mob.cmd $run_name >> ../mob.log; echo $?`;
+    if ($status != 0) {
+        `echo "$status" | mail -s 'Error on $machine: $name $next Submission Failed...' $email`;
+        exit 1;
+    }
 }
 
 sub update_last_next { # update last and next variable
