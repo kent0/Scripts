@@ -115,6 +115,7 @@ for (;;) { # infinite loop
     }
 
     if ($cleanrun) {
+        sleep(120);
         `echo \$(date -R) 'post-processing...' >> mob.log`;
         `cd $last; ../mob.post &>> ../mob.log`;
         `echo \$(date -R) 'proceeding to $next...' >> mob.log`;
