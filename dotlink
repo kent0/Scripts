@@ -8,9 +8,10 @@ rm ~/.gitconfig
 rm ~/.inputrc
 rm ~/.vimrc
 rm ~/.tmux.conf
+rm ~/tmux.conf
 
 ln -s ~/{Developer/Dotfiles/,.}bashrc
 ln -s ~/{Developer/Dotfiles/,.}gitconfig
 ln -s ~/{Developer/Dotfiles/,.}inputrc
 ln -s ~/{Developer/Dotfiles/,.}vimrc
-ln -s ~/Developer/Dotfiles/tmux ~/.tmux.conf
+ln -s ~/{Developer/Dotfiles/,.}tmux.conf
