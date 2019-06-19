@@ -1,10 +1,11 @@
 #!/bin/bash
 
-IT_TI=xterm-256color-italic.terminfo
+#IT_TI=xterm-256color-italic.terminfo
+IT_TI=xterm-italic.terminfo
 
-echo 'xterm-256color-italic|xterm with 256 colors and italic,' > $IT_TI
+echo 'xterm-italic|xterm with 256 colors and italic,' > $IT_TI
 echo '    sitm=\E[3m, ritm=\E[23m,'                           >> $IT_TI
 echo '            use=xterm-256color,'                        >> $IT_TI
 
-tic xterm-256color-italic.terminfo
+tic xterm-italic.terminfo
 rm $IT_TI
