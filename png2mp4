@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# usage: png2mp4 60 input_format output_name
+
+ffmpeg -framerate $1 -f image2 -i "${2}%04d.png" -vcodec h264_videotoolbox -b:v 12M -pix_fmt yuv420p ${3}.mp4
