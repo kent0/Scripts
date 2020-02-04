@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file="f.tar.gz"
+
+if [ "$#" -gt "0" ]; then
+    file="$1"
+fi
+   
+scp luna:~/$file .
+tar -xvzf $file
