@@ -29,4 +29,7 @@ sudo chmod 600 /etc/wireguard/{privatekey,wg0.conf}
 
 sudo wg-quick up wg0
 
-sudo echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/99-custom.conf
+file=$(mktemp)
+echo 'net.ipv4.ip_forward=1' > $file
+sudo mv $file /etc/sysctl.d/99-custom.conf
+sudo chown root.root !$
