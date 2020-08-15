@@ -18,7 +18,7 @@ sudo echo '[Interface]' > file
 sudo echo 'Address = 10.0.0.1/24' >> file
 sudo echo 'SaveConfig = true' >> file
 sudo echo 'ListenPort = 51820' >> file
-sudo echo 'PrivateKey = ' "$(cat /etc/wireguard/privatekey)" >> file
+sudo echo 'PrivateKey = ' "$(sudo cat /etc/wireguard/privatekey)" >> file
 sudo echo 'PostUp     = firewall-cmd --zone=public --add-port 51820/udp && firewall-cmd --zone=public --add-masquerade' >> file
 sudo echo 'PostDown   = firewall-cmd --zone=public --remove-port 51820/udp && firewall-cmd --zone=public --remove-masquerade' >> file
 
