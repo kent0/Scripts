@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/master/c8)";
+
+sudo dnf install epel-release elrepo-release
+sudo dnf install kmod-wireguard wireguard-tools
+
+sudo yum install git vim tmux gcc mpich
+
+sudo yum update
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/master/bootstrap)"; source ~/.bashrc
+
+sudo mkdir /etc/wireguard
+wg genkey | sudo tee /etc/wireguard/privatekey | wg pubkey | sudo tee /etc/wireguard/publickey
+
+file=/etc/wireguard/wg0.conf
+
+sudo echo '[Interface]' > file
+sudo echo 'Address = 10.0.0.1/24' >> file
+sudo echo 'SaveConfig = true' >> file
+sudo echo 'ListenPort = 51820' >> file
+sudo echo 'PrivateKey = ' $(cat /etc/wireguard/privatekey)' >> file
+sudo echo 'PostUp     = firewall-cmd --zone=public --add-port 51820/udp && firewall-cmd --zone=public --add-masquerade' >> file
+sudo echo 'PostDown   = firewall-cmd --zone=public --remove-port 51820/udp && firewall-cmd --zone=public --remove-masquerade' >> file
+
+sudo chmod 600 /etc/wireguard/{privatekey,wg0.conf}
+
+sudo wg-quick up wg0
+
+sudo echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/99-custom.conf
