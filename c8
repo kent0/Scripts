@@ -2,12 +2,12 @@
 
 #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/master/c8)";
 
-sudo dnf install epel-release elrepo-release
-sudo dnf install kmod-wireguard wireguard-tools
+sudo dnf install -y epel-release elrepo-release
+sudo dnf install -y kmod-wireguard wireguard-tools
 
-sudo yum install git vim tmux gcc mpich
+sudo yum install -y git vim tmux gcc mpich
 
-sudo yum update
+sudo yum update -y
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/master/bootstrap)"; source ~/.bashrc
 
@@ -20,7 +20,7 @@ sudo echo '[Interface]' > file
 sudo echo 'Address = 10.0.0.1/24' >> file
 sudo echo 'SaveConfig = true' >> file
 sudo echo 'ListenPort = 51820' >> file
-sudo echo 'PrivateKey = ' $(cat /etc/wireguard/privatekey)' >> file
+sudo echo 'PrivateKey = ' "$(cat /etc/wireguard/privatekey)" >> file
 sudo echo 'PostUp     = firewall-cmd --zone=public --add-port 51820/udp && firewall-cmd --zone=public --add-masquerade' >> file
 sudo echo 'PostDown   = firewall-cmd --zone=public --remove-port 51820/udp && firewall-cmd --zone=public --remove-masquerade' >> file
 
