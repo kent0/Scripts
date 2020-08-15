@@ -12,15 +12,18 @@ sudo yum update -y
 sudo mkdir /etc/wireguard
 wg genkey | sudo tee /etc/wireguard/privatekey | wg pubkey | sudo tee /etc/wireguard/publickey
 
-file=/etc/wireguard/wg0.conf
+#file=/etc/wireguard/wg0.conf
+file=$(mktemp)
+echo '[Interface]' > file
+echo 'Address = 10.0.0.1/24' >> file
+echo 'SaveConfig = true' >> file
+echo 'ListenPort = 51820' >> file
+echo 'PrivateKey = ' "$(sudo cat /etc/wireguard/privatekey)" >> file
+echo 'PostUp     = firewall-cmd --zone=public --add-port 51820/udp && firewall-cmd --zone=public --add-masquerade' >> file
+echo 'PostDown   = firewall-cmd --zone=public --remove-port 51820/udp && firewall-cmd --zone=public --remove-masquerade' >> file
 
-sudo echo '[Interface]' > file
-sudo echo 'Address = 10.0.0.1/24' >> file
-sudo echo 'SaveConfig = true' >> file
-sudo echo 'ListenPort = 51820' >> file
-sudo echo 'PrivateKey = ' "$(sudo cat /etc/wireguard/privatekey)" >> file
-sudo echo 'PostUp     = firewall-cmd --zone=public --add-port 51820/udp && firewall-cmd --zone=public --add-masquerade' >> file
-sudo echo 'PostDown   = firewall-cmd --zone=public --remove-port 51820/udp && firewall-cmd --zone=public --remove-masquerade' >> file
+sudo mv $file /etc/wireguard/wg0.conf
+sudo chown root.root !$
 
 sudo chmod 600 /etc/wireguard/{privatekey,wg0.conf}
 
