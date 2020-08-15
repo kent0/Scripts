@@ -9,8 +9,6 @@ sudo yum install -y git vim tmux gcc mpich
 
 sudo yum update -y
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/kent0/Scripts/master/bootstrap)"; source ~/.bashrc
-
 sudo mkdir /etc/wireguard
 wg genkey | sudo tee /etc/wireguard/privatekey | wg pubkey | sudo tee /etc/wireguard/publickey
 
