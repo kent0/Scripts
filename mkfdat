@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep fluxes logfile | sed 's/fluxes1//g' > fluxes.dat
