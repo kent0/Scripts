@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cp ~/Developer/Templates/tex.tex $1.tex
-cp ~/Developer/Templates/tex.makefile makefile
+cp ~/Developer/Templates/{head,body,main}.tex .
+sed "s/\*/$1/g" ~/Developer/Templates/tex.makefile > makefile
