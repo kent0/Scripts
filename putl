@@ -1,3 +1,0 @@
-#!/bin/bash
-
-tar -hcvzf f.tar.gz $@; scp f.tar.gz luna:~; rm f.tar.gz;
