@@ -19,7 +19,6 @@ if [ $num_args -eq 1 ]; then
         i=$((i+1))
     done
 
-    echo  "${#matches[@]}"
     if [ "${#matches[@]}" -gt 1 ]; then
         read -n 1 num
         if [ "$num" != '' ]; then echo ''; fi
