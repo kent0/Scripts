@@ -3,9 +3,9 @@
 mkdir ~/Developer
 cd ~/Developer 
 
-git clone https://github.com/kent0/Dotfiles
-git clone https://github.com/kent0/Scripts
-git clone https://github.com/kent0/Z
+git clone git@github.com:kent0/Dotfiles.git
+git clone git@github.com:kent0/Scripts.git
+git clone git@github.com:kent0/Z.git
 
 Scripts/italic
 Scripts/dotlink
